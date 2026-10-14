@@ -158,7 +158,8 @@ export function SearchPage() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-10">
-      <h1 className="text-section font-semibold">Results</h1>
+      <p className="kicker text-muted-foreground">Live web search</p>
+      <h1 className="text-section mt-2 font-semibold">Results</h1>
       <details className="bg-card mt-4 rounded-2xl border p-4 sm:p-5" open={state.kind === "invalid"}>
         <summary className="min-h-11 cursor-pointer content-center font-semibold">Edit search</summary>
         <div className="mt-4">

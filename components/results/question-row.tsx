@@ -1,7 +1,9 @@
 "use client";
+
+import { LeetCodeIcon } from "./leetcode-icon";
 import { useMemo } from "react";
 import toast from "react-hot-toast";
-import { Bookmark, BookmarkCheck, Check, ExternalLink, Search as SearchIcon } from "lucide-react";
+import { Bookmark, BookmarkCheck, Check } from "lucide-react";
 import { domainOf } from "@/lib/links";
 import type { Difficulty, ResultQuestion } from "@/lib/schema";
 import { getSaved, removeSaved, setSolved, StorageError, upsertSaved } from "@/lib/storage";
@@ -16,7 +18,16 @@ const diffStyle: Record<Difficulty, string> = {
 
 export function DifficultyBadge({ d }: { d?: Difficulty }) {
   if (!d) return null;
-  return <span className={cn("rounded-full px-2.5 py-0.5 text-sm font-semibold", diffStyle[d])}>{d}</span>;
+  return (
+    <span
+      className={cn(
+        "rounded-md px-2 py-0.5 font-mono text-[0.75rem] font-medium tracking-wide uppercase",
+        diffStyle[d],
+      )}
+    >
+      {d}
+    </span>
+  );
 }
 
 function reportError(e: unknown) {
@@ -80,9 +91,11 @@ export function QuestionRow({ q, topic, companies }: { q: ResultQuestion; topic:
         </h4>
         <DifficultyBadge d={q.difficulty} />
         {q.pattern && (
-          <span className="bg-muted text-muted-foreground rounded-full px-2.5 py-0.5 text-sm">{q.pattern}</span>
+          <span className="text-muted-foreground font-mono text-[0.75rem] before:mr-1 before:content-['#']">
+            {q.pattern}
+          </span>
         )}
-        {q.reportedYear && <span className="text-muted-foreground text-sm">{q.reportedYear}</span>}
+        {q.reportedYear && <span className="text-muted-foreground font-mono text-[0.75rem]">{q.reportedYear}</span>}
       </div>
       {companies.length > 1 && <p className="text-muted-foreground mt-1 text-sm">Asked at: {companies.join(", ")}</p>}
       <p className="text-muted-foreground mt-1.5 text-sm">
@@ -108,11 +121,7 @@ export function QuestionRow({ q, topic, companies }: { q: ResultQuestion; topic:
           rel="noopener noreferrer"
           className="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex min-h-11 items-center gap-1.5 rounded-lg px-3 text-[0.9375rem] font-semibold sm:min-h-9"
         >
-          {q.link.kind === "direct" ? (
-            <ExternalLink className="size-4" aria-hidden />
-          ) : (
-            <SearchIcon className="size-4" aria-hidden />
-          )}
+          <LeetCodeIcon className="size-4" />
           {q.link.kind === "direct" ? "Open on LeetCode" : "Search on LeetCode"}
         </a>
         <button type="button" onClick={toggleSave} aria-pressed={!!saved} className={actionBtn} disabled={v < 0}>

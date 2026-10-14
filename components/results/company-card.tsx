@@ -15,7 +15,10 @@ const confStyle: Record<Confidence, string> = {
 export function ConfidenceTag({ c }: { c: Confidence }) {
   return (
     <span
-      className={cn("rounded-full px-2.5 py-0.5 text-sm font-semibold", confStyle[c])}
+      className={cn(
+        "rounded-md px-2 py-0.5 font-mono text-[0.75rem] font-medium tracking-wide uppercase",
+        confStyle[c],
+      )}
       title="Computed from question count and distinct source domains"
     >
       {c} confidence
@@ -51,8 +54,10 @@ export function GroupCard({
           onClick={() => setOpen((o) => !o)}
           className="flex min-h-14 w-full flex-wrap items-center gap-x-3 gap-y-1 rounded-2xl px-4 py-3 text-left sm:px-5"
         >
-          <span className="min-w-[9rem] flex-1 font-semibold break-words">{title}</span>
-          <span className="text-muted-foreground text-sm">
+          <span className="font-display min-w-[9rem] flex-1 text-[1.125rem] font-semibold tracking-tight break-words">
+            {title}
+          </span>
+          <span className="text-muted-foreground font-mono text-[0.75rem]">
             {questions.length} question{questions.length === 1 ? "" : "s"}
           </span>
           {meta}

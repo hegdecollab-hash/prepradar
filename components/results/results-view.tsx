@@ -122,8 +122,10 @@ export function ResultsView({
   return (
     <div className="space-y-6">
       <div className="space-y-3">
-        <p className="text-muted-foreground">
-          <span className="text-foreground font-semibold">{result.topic}</span>
+        <p className="text-muted-foreground font-mono text-[0.8125rem] leading-relaxed">
+          <span className="font-display text-foreground text-[1.0625rem] font-semibold tracking-tight">
+            {result.topic}
+          </span>
           {result.company && (
             <>
               {" "}

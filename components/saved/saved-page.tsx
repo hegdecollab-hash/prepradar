@@ -58,7 +58,8 @@ export function SavedPage() {
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 sm:py-10">
-      <h1 className="text-section font-semibold">Saved questions</h1>
+      <p className="kicker text-muted-foreground">Your checklist</p>
+      <h1 className="text-hero mt-2 font-[750]">Saved</h1>
       <p className="text-muted-foreground mt-2">{PRIVACY_NOTICE}</p>
 
       {!available && (
@@ -84,8 +85,9 @@ export function SavedPage() {
       {items.length > 0 && (
         <>
           <div className="mt-6 flex flex-wrap items-center gap-3">
-            <p className="mr-auto font-semibold">
-              {solved} / {items.length} solved
+            <p className="mr-auto font-mono text-[0.875rem]">
+              <span className="font-display text-[2rem] font-bold tracking-tight">{solved}</span>
+              <span className="text-muted-foreground"> / {items.length} solved</span>
             </p>
             <Button
               variant="outline"
@@ -117,7 +119,7 @@ export function SavedPage() {
               const done = group.filter((q) => q.solved).length;
               return (
                 <section key={group[0].topic} className="bg-card rounded-2xl border p-4 sm:p-5">
-                  <h2 className="flex flex-wrap items-baseline justify-between gap-2 font-semibold capitalize">
+                  <h2 className="flex flex-wrap items-baseline justify-between gap-2 text-[1.25rem] font-semibold capitalize">
                     {group[0].topic}
                     <span className="text-muted-foreground text-sm font-normal normal-case">
                       {done} / {group.length} solved

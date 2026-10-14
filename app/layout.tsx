@@ -1,12 +1,19 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Bricolage_Grotesque, Instrument_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ToasterProvider } from "@/components/toaster-provider";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { APP_NAME, APP_URL } from "@/lib/config";
 
-const inter = Inter({ subsets: ["latin"], weight: ["400", "600"], variable: "--font-inter", display: "swap" });
+const display = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-display", display: "swap" });
+const body = Instrument_Sans({ subsets: ["latin"], variable: "--font-body", display: "swap" });
+const mono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-mono-jb",
+  display: "swap",
+});
 
 const description =
   "Enter a DSA topic. See which companies asked about it, the questions reported, and a LeetCode link for each.";
@@ -30,7 +37,7 @@ export const viewport: Viewport = { themeColor: "#fbfaf7", width: "device-width"
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={inter.variable}>
+    <html lang="en" className={`${display.variable} ${body.variable} ${mono.variable}`}>
       <body className="flex min-h-dvh flex-col">
         <a
           href="#main"

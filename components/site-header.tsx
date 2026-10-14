@@ -6,7 +6,10 @@ export function SiteHeader() {
   return (
     <header className="border-border/70 bg-background/90 supports-[backdrop-filter]:bg-background/75 sticky top-0 z-40 border-b backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
-        <Link href="/" className="flex min-h-11 items-center gap-2 rounded-lg font-semibold">
+        <Link
+          href="/"
+          className="font-display flex min-h-11 items-center gap-2 rounded-lg text-[1.125rem] font-bold tracking-tight"
+        >
           <Radar className="text-primary size-5" aria-hidden />
           {APP_NAME}
         </Link>
