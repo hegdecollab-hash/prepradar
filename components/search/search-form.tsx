@@ -1,6 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { Formik, Form, Field, type FieldProps } from "formik";
+import { useEffect, useRef } from "react";
+import { Formik, Form, Field, type FieldProps, type FormikProps } from "formik";
 import { Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CompanyLogo } from "@/components/company-logo";
@@ -24,10 +25,44 @@ export function buildSearchHref(v: Values) {
 const chip =
   "inline-flex min-h-11 items-center gap-2 rounded-full border px-4 text-[0.9375rem] transition-colors hover:border-primary/50 hover:text-primary sm:min-h-9 sm:px-3";
 
-export function SearchForm({ initial, compact = false }: { initial?: Partial<Values>; compact?: boolean }) {
+export const PREFILL_EVENT = "prepradar:prefill";
+
+/** Ask the landing search form to prefill a topic (used by the sample banner). */
+export function requestPrefill(topic: string) {
+  window.history.replaceState(null, "", `/?topic=${encodeURIComponent(topic)}#find`);
+  window.dispatchEvent(new CustomEvent(PREFILL_EVENT));
+}
+
+export function SearchForm({
+  initial,
+  compact = false,
+  prefillFromUrl = false,
+}: {
+  initial?: Partial<Values>;
+  compact?: boolean;
+  prefillFromUrl?: boolean;
+}) {
   const router = useRouter();
+  const formik = useRef<FormikProps<Values>>(null);
+
+  useEffect(() => {
+    if (!prefillFromUrl) return;
+    const apply = () => {
+      const topic = new URLSearchParams(window.location.search).get("topic");
+      if (!topic || !formik.current) return;
+      formik.current.setFieldValue("topic", topic.slice(0, 80));
+      const input = document.getElementById("topic") as HTMLInputElement | null;
+      document.getElementById("find")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      input?.focus({ preventScroll: true });
+    };
+    apply();
+    window.addEventListener(PREFILL_EVENT, apply);
+    return () => window.removeEventListener(PREFILL_EVENT, apply);
+  }, [prefillFromUrl]);
+
   return (
     <Formik<Values>
+      innerRef={formik}
       initialValues={{
         topic: initial?.topic ?? "",
         company: initial?.company ?? "",

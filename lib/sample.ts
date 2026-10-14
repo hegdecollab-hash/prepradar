@@ -6,7 +6,7 @@ export const SAMPLE_RESULT: SearchResult = {
   company: null,
   difficulty: "Any",
   searchedAt: "2026-01-01T00:00:00.000Z",
-  model: "sample (no model call)",
+  model: "no model call",
   isDsaTopic: true,
   notes: "This is a static sample to show the layout. Run a search for real, sourced results.",
   sources: [

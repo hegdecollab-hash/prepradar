@@ -74,15 +74,18 @@ export default function Home() {
           </FadeIn>
           <div>
             <div className="bg-card rounded-2xl border p-4 shadow-[0_1px_0_rgba(0,0,0,0.04),0_12px_40px_-12px_rgba(31,31,35,0.12)] sm:p-6">
-              <SearchForm />
+              <SearchForm prefillFromUrl />
             </div>
             <p className="text-muted-foreground mt-3 text-sm">
               <Link
                 href="#example"
-                className="text-primary inline-flex min-h-11 items-center font-semibold hover:underline"
+                className="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center underline decoration-dotted underline-offset-4"
               >
-                See an example →
-              </Link>{" "}
+                or see a static example
+              </Link>
+              <span className="mx-2" aria-hidden>
+                ·
+              </span>
               Searches go to OpenRouter. Progress stays here.
             </p>
           </div>
