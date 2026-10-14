@@ -39,6 +39,7 @@
     "playwright": "1.64.1",
     "prettier": "3.9.10",
     "prettier-plugin-tailwindcss": "0.8.1",
+    "simple-icons": "16.35.0",
     "tailwindcss": "4.3.3",
     "typescript": "5.9.3",
     "vitest": "5.0.4"

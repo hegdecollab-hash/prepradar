@@ -1,6 +1,7 @@
 "use client";
 
 import { LeetCodeIcon } from "./leetcode-icon";
+import { CompanyLogo } from "@/components/company-logo";
 import { useMemo } from "react";
 import toast from "react-hot-toast";
 import { Bookmark, BookmarkCheck, Check } from "lucide-react";
@@ -37,7 +38,17 @@ function reportError(e: unknown) {
 const actionBtn =
   "inline-flex min-h-11 items-center gap-1.5 rounded-lg border px-3 text-[0.9375rem] transition-colors hover:bg-muted sm:min-h-9";
 
-export function QuestionRow({ q, topic, companies }: { q: ResultQuestion; topic: string; companies: string[] }) {
+export function QuestionRow({
+  q,
+  topic,
+  companies,
+  showCompanies = false,
+}: {
+  q: ResultQuestion;
+  topic: string;
+  companies: string[];
+  showCompanies?: boolean;
+}) {
   const v = useStorageVersion();
   const saved = useMemo(() => (v < 0 ? undefined : getSaved()[q.key]), [v, q.key]);
 
@@ -97,7 +108,19 @@ export function QuestionRow({ q, topic, companies }: { q: ResultQuestion; topic:
         )}
         {q.reportedYear && <span className="text-muted-foreground font-mono text-[0.75rem]">{q.reportedYear}</span>}
       </div>
-      {companies.length > 1 && <p className="text-muted-foreground mt-1 text-sm">Asked at: {companies.join(", ")}</p>}
+      {(showCompanies || companies.length > 1) && (
+        <div className="text-muted-foreground mt-2 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-sm">
+          <span>Asked at:</span>
+          <ul className="contents">
+            {companies.map((c) => (
+              <li key={c} className="text-foreground inline-flex items-center gap-1.5">
+                <CompanyLogo name={c} size="sm" />
+                {c}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
       <p className="text-muted-foreground mt-1.5 text-sm">
         Reported at:{" "}
         {q.sourceUrls.map((u, i) => (

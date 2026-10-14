@@ -10,6 +10,7 @@ import { getSaved } from "@/lib/storage";
 import { useStorageVersion } from "@/lib/use-storage";
 import { cn } from "@/lib/utils";
 import { ConfidenceTag, GroupCard } from "./company-card";
+import { CompanyLogo } from "@/components/company-logo";
 
 const selectCls =
   "h-11 w-full rounded-xl border bg-card px-3 outline-none focus-visible:border-primary focus-visible:ring-4 focus-visible:ring-primary/15";
@@ -200,6 +201,7 @@ export function ResultsView({
                 <GroupCard
                   key={c.name}
                   title={c.name}
+                  leading={<CompanyLogo name={c.name} />}
                   meta={<ConfidenceTag c={c.confidence} />}
                   questions={c.questions}
                   topic={result.topic}
@@ -214,6 +216,7 @@ export function ResultsView({
                   questions={[e.q]}
                   topic={result.topic}
                   companiesFor={() => e.companies}
+                  showCompanies
                 />
               ))}
 

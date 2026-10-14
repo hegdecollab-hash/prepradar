@@ -28,6 +28,8 @@ export function ConfidenceTag({ c }: { c: Confidence }) {
 
 export function GroupCard({
   title,
+  leading,
+  showCompanies = false,
   meta,
   questions,
   topic,
@@ -35,6 +37,8 @@ export function GroupCard({
   defaultOpen = true,
 }: {
   title: string;
+  leading?: React.ReactNode;
+  showCompanies?: boolean;
   meta?: React.ReactNode;
   questions: ResultQuestion[];
   topic: string;
@@ -54,6 +58,7 @@ export function GroupCard({
           onClick={() => setOpen((o) => !o)}
           className="flex min-h-14 w-full flex-wrap items-center gap-x-3 gap-y-1 rounded-2xl px-4 py-3 text-left sm:px-5"
         >
+          {leading}
           <span className="font-display min-w-[9rem] flex-1 text-[1.125rem] font-semibold tracking-tight break-words">
             {title}
           </span>
@@ -79,7 +84,13 @@ export function GroupCard({
           >
             <ul className="divide-y border-t px-4 sm:px-5">
               {questions.map((q) => (
-                <QuestionRow key={q.key} q={q} topic={topic} companies={companiesFor(q)} />
+                <QuestionRow
+                  key={q.key}
+                  q={q}
+                  topic={topic}
+                  companies={companiesFor(q)}
+                  showCompanies={showCompanies}
+                />
               ))}
             </ul>
           </motion.div>

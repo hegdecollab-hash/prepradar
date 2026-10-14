@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import { Formik, Form, Field, type FieldProps } from "formik";
 import { Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { CompanyLogo } from "@/components/company-logo";
 import { COMPANY_CHIPS, TOPIC_CHIPS } from "@/lib/config";
 import { DIFFICULTIES, normalizeSpaces, searchFormSchema, type DifficultyFilter } from "@/lib/schema";
 import { cn } from "@/lib/utils";
@@ -21,7 +22,7 @@ export function buildSearchHref(v: Values) {
 }
 
 const chip =
-  "inline-flex min-h-11 items-center rounded-full border px-4 text-[0.9375rem] transition-colors hover:border-primary/50 hover:text-primary sm:min-h-9 sm:px-3";
+  "inline-flex min-h-11 items-center gap-2 rounded-full border px-4 text-[0.9375rem] transition-colors hover:border-primary/50 hover:text-primary sm:min-h-9 sm:px-3";
 
 export function SearchForm({ initial, compact = false }: { initial?: Partial<Values>; compact?: boolean }) {
   const router = useRouter();
@@ -156,6 +157,7 @@ export function SearchForm({ initial, compact = false }: { initial?: Partial<Val
                       values.company === c ? "border-primary bg-accent text-accent-foreground" : "bg-card",
                     )}
                   >
+                    <CompanyLogo name={c} size="sm" />
                     {c}
                   </button>
                 </li>

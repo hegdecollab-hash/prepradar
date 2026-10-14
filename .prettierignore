@@ -3,3 +3,4 @@ node_modules
 screenshots
 package-lock.json
 next-env.d.ts
+lib/company-logos.generated.ts
