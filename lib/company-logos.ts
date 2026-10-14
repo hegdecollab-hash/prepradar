@@ -66,6 +66,23 @@ const ALIASES: Record<string, string> = {
   "tata consultancy services": "tcs",
   wipro: "wipro",
   accenture: "accenture",
+  amazon: "amazon",
+  "amazon com": "amazon",
+  aws: "amazonwebservices",
+  "amazon web services": "amazonwebservices",
+  microsoft: "microsoft",
+  adobe: "adobe",
+  salesforce: "salesforce",
+  oracle: "oracle",
+  "oracle cloud": "oracle",
+  flipkart: "flipkart",
+  linkedin: "linkedin",
+  ibm: "ibm",
+  walmart: "walmart",
+  "walmart global tech": "walmart",
+  twilio: "twilio",
+  yahoo: "yahoo",
+  docusign: "docusign",
 };
 
 export const normalizeCompany = (name: string) =>

@@ -18,7 +18,7 @@ describe("getCompanyLogo", () => {
       expect(getCompanyLogo(n), n).not.toBeNull();
   });
   it("returns null (monogram) for unknown or unavailable brands", () => {
-    for (const n of ["Amazon", "Microsoft", "Docusign", "Some Startup"]) expect(getCompanyLogo(n), n).toBeNull();
+    for (const n of ["Bloomberg", "Deloitte", "Some Startup"]) expect(getCompanyLogo(n), n).toBeNull();
   });
   it("darkens too-light brand colors", () => {
     expect(getCompanyLogo("Snapchat")?.color).toBe("#1f1f23");
