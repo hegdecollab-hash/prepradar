@@ -59,13 +59,13 @@ export const searchFormSchema = Yup.object({
   topic: Yup.string()
     .trim()
     .required("Enter a DSA topic.")
-    .min(2, "Topic must be at least 2 characters.")
-    .max(80, "Topic must be 80 characters or fewer.")
-    .test("chars", "Topic contains invalid characters.", noControl),
+    .min(2, "Use at least 2 characters.")
+    .max(80, "Keep the topic under 80 characters.")
+    .test("chars", "Remove unsupported characters from the topic.", noControl),
   company: Yup.string()
     .trim()
-    .max(60, "Company must be 60 characters or fewer.")
-    .test("chars", "Company contains invalid characters.", noControl),
+    .max(60, "Keep the company name under 60 characters.")
+    .test("chars", "Remove unsupported characters from the company name.", noControl),
   difficulty: Yup.mixed<DifficultyFilter>()
     .oneOf(["Any", ...DIFFICULTIES])
     .default("Any"),

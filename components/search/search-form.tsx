@@ -27,12 +27,6 @@ const chip =
 
 export const PREFILL_EVENT = "prepradar:prefill";
 
-/** Ask the landing search form to prefill a topic (used by the sample banner). */
-export function requestPrefill(topic: string) {
-  window.history.replaceState(null, "", `/?topic=${encodeURIComponent(topic)}#find`);
-  window.dispatchEvent(new CustomEvent(PREFILL_EVENT));
-}
-
 export function SearchForm({
   initial,
   compact = false,
@@ -93,7 +87,7 @@ export function SearchForm({
                     id="topic"
                     autoComplete="off"
                     maxLength={120}
-                    placeholder="e.g. sliding window"
+                    placeholder="Try “sliding window”"
                     aria-invalid={!!(touched.topic && errors.topic)}
                     aria-describedby={touched.topic && errors.topic ? "topic-error" : undefined}
                     className={cn(
@@ -145,7 +139,7 @@ export function SearchForm({
                     list="company-suggestions"
                     autoComplete="off"
                     maxLength={80}
-                    placeholder="Any company"
+                    placeholder="All companies"
                     aria-invalid={!!(touched.company && errors.company)}
                     aria-describedby={touched.company && errors.company ? "company-error" : undefined}
                     className="bg-card focus-visible:border-primary focus-visible:ring-primary/15 h-12 w-full rounded-xl border px-4 outline-none focus-visible:ring-4"

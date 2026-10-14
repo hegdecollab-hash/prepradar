@@ -1,21 +1,19 @@
 import Link from "next/link";
 import { SearchForm } from "@/components/search/search-form";
-import { ResultsView } from "@/components/results/results-view";
 import { FadeIn } from "@/components/landing/fade-in";
 import { PRIVACY_NOTICE } from "@/lib/config";
-import { SAMPLE_RESULT } from "@/lib/sample";
 
 const steps = [
-  { t: "Enter a topic", d: "Type a DSA topic like sliding window. Add a company if you want to narrow it down." },
+  { t: "Enter a topic", d: "Type a DSA topic, like sliding window. Add a company to narrow the results." },
   {
-    t: "We search the live web",
-    d: "The app asks a web-search-enabled model, through OpenRouter, for interview reports and prep lists on that topic.",
+    t: "Search the live web",
+    d: "PrepRadar asks a web-search model, via OpenRouter, for interview reports and prep lists on that topic.",
   },
   {
     t: "Check the evidence",
-    d: "Every question shows the source it came from and a LeetCode link. Unsourced questions are dropped.",
+    d: "Every question links to its source and to LeetCode. Questions without a source are removed.",
   },
-  { t: "Track your prep", d: "Save questions to a checklist in this browser and mark them solved as you go." },
+  { t: "Track your prep", d: "Save questions to a checklist in this browser and mark them solved as you practice." },
 ];
 
 const faqs = [
@@ -25,7 +23,7 @@ const faqs = [
   },
   {
     q: "How accurate is it?",
-    a: "Questions reported by candidates and prep sources. Verify before relying on them. Interview reports are anecdotal and can be outdated. We drop questions that are not tied to a cited source, and confidence tags reflect how many questions and distinct sources back each company.",
+    a: "Interview reports are anecdotal and can be out of date, so verify questions before you rely on them. We drop questions that are not tied to a cited source, and confidence tags reflect how many questions and distinct sources back each company.",
   },
   {
     q: "Why do some links open a LeetCode search?",
@@ -53,11 +51,11 @@ export default function Home() {
           <FadeIn className="lg:pt-6">
             <p className="kicker text-primary">DSA interview research · live web</p>
             <h1 className="text-hero mt-5 font-[750] text-balance">
-              Know what companies <span className="text-primary">actually</span> ask.
+              See what companies <span className="text-primary">actually</span> ask.
             </h1>
             <p className="text-muted-foreground mt-6 max-w-md text-[1.125rem] leading-relaxed text-pretty">
-              Enter a DSA topic. See which companies asked about it, the questions reported, and a LeetCode link for
-              each.
+              Search any DSA topic to see which companies ask it, the questions candidates reported, and a LeetCode
+              link for each.
             </p>
             <dl className="mt-10 hidden max-w-md grid-cols-3 gap-6 border-t pt-5 lg:grid">
               {[
@@ -77,34 +75,8 @@ export default function Home() {
               <SearchForm prefillFromUrl />
             </div>
             <p className="text-muted-foreground mt-3 text-sm">
-              <Link
-                href="#example"
-                className="text-muted-foreground hover:text-foreground inline-flex min-h-11 items-center underline decoration-dotted underline-offset-4"
-              >
-                or see a static example
-              </Link>
-              <span className="mx-2" aria-hidden>
-                ·
-              </span>
-              Searches go to OpenRouter. Progress stays here.
+              Searches run through OpenRouter. Your progress stays in this browser.
             </p>
-          </div>
-        </div>
-      </section>
-
-      <section id="example" className="scroll-mt-20 border-y bg-[#f4f2ec] py-16 lg:py-20">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <FadeIn className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-            <div>
-              <p className="kicker text-muted-foreground">Sample preview · static, not a live result</p>
-              <h2 className="text-section mt-3 font-semibold">What a result looks like</h2>
-            </div>
-            <p className="text-muted-foreground max-w-sm lg:text-right">
-              Placeholder companies and sources, so you can see the layout before you search.
-            </p>
-          </FadeIn>
-          <div className="mt-10">
-            <ResultsView result={SAMPLE_RESULT} sample />
           </div>
         </div>
       </section>
@@ -181,7 +153,7 @@ export default function Home() {
 
       <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:py-28">
         <div className="flex flex-col items-start gap-6 lg:flex-row lg:items-end lg:justify-between">
-          <h2 className="text-hero max-w-3xl font-[750] text-balance">Pick a topic. Start.</h2>
+          <h2 className="text-hero max-w-3xl font-[750] text-balance">Pick a topic. Start practicing.</h2>
           <Link
             href="/#find"
             className="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex min-h-12 items-center rounded-xl px-6 font-semibold"
@@ -189,7 +161,7 @@ export default function Home() {
             Find questions
           </Link>
         </div>
-        <p className="text-muted-foreground mt-4">One topic, real sources, a checklist you control.</p>
+        <p className="text-muted-foreground mt-4">One topic. Real sources. A checklist you control.</p>
       </section>
     </div>
   );

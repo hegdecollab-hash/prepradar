@@ -30,7 +30,7 @@ export function runSearch(key: string, input: { topic: string; company?: string;
       throw new SearchFailure({
         code: navigator.onLine ? "network" : "offline",
         message: navigator.onLine
-          ? "Could not reach the server. Check your connection and try again."
+          ? "Couldn't reach PrepRadar. Check your connection and try again."
           : "You're offline. Reconnect and try again.",
         retryable: true,
         requestId,
@@ -42,7 +42,7 @@ export function runSearch(key: string, input: { topic: string; company?: string;
     } catch {
       throw new SearchFailure({
         code: "bad_response",
-        message: `The server returned an unreadable response (${res.status}).`,
+        message: `We received an unexpected response (${res.status}). Try again.`,
         retryable: true,
         requestId,
       });
@@ -51,7 +51,7 @@ export function runSearch(key: string, input: { topic: string; company?: string;
       const b = body as Partial<ApiError>;
       throw new SearchFailure({
         code: b.code ?? "error",
-        message: b.message ?? `Search failed (${res.status}).`,
+        message: b.message ?? `The search didn't complete (${res.status}). Try again.`,
         retryable: !!b.retryable,
         requestId: b.requestId ?? requestId,
       });

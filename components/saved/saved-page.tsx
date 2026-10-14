@@ -26,7 +26,7 @@ function run(fn: () => void, ok?: string, id?: string) {
     fn();
     if (ok) toast.success(ok, { id: id ?? ok });
   } catch (e) {
-    toast.error(e instanceof StorageError ? e.message : "Could not update browser storage.", { id: "storage-error" });
+    toast.error(e instanceof StorageError ? e.message : "Couldn't update browser storage.", { id: "storage-error" });
   }
 }
 
@@ -71,8 +71,8 @@ export function SavedPage() {
 
       {v >= 0 && available && items.length === 0 && (
         <div className="bg-card mt-8 rounded-2xl border border-dashed p-10 text-center">
-          <p className="font-semibold">No saved questions yet.</p>
-          <p className="text-muted-foreground mt-2">Run a search and tap Save on the questions you want to practice.</p>
+          <p className="font-semibold">No saved questions yet</p>
+          <p className="text-muted-foreground mt-2">Search a topic, then save the questions you want to practice.</p>
           <Link
             href="/"
             className="bg-primary text-primary-foreground mt-4 inline-flex min-h-11 items-center rounded-xl px-5 font-semibold"
@@ -175,7 +175,7 @@ export function SavedPage() {
                             type="button"
                             aria-label={`Remove ${q.title}`}
                             className="hover:bg-muted inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border"
-                            onClick={() => run(() => removeSaved(q.key), "Removed from saved", `save-${q.key}`)}
+                            onClick={() => run(() => removeSaved(q.key), "Removed from your checklist", `save-${q.key}`)}
                           >
                             <Trash2 className="size-4" aria-hidden />
                           </button>

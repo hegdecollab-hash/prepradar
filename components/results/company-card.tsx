@@ -19,7 +19,7 @@ export function ConfidenceTag({ c }: { c: Confidence }) {
         "rounded-md px-2 py-0.5 font-mono text-[0.75rem] font-medium tracking-wide uppercase",
         confStyle[c],
       )}
-      title="Computed from question count and distinct source domains"
+      title="Based on the number of questions and distinct source sites"
     >
       {c} confidence
     </span>

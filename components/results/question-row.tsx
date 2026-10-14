@@ -32,7 +32,7 @@ export function DifficultyBadge({ d }: { d?: Difficulty }) {
 }
 
 function reportError(e: unknown) {
-  toast.error(e instanceof StorageError ? e.message : "Could not update your checklist.", { id: "storage-error" });
+  toast.error(e instanceof StorageError ? e.message : "Couldn't update your checklist.", { id: "storage-error" });
 }
 
 const actionBtn =
@@ -70,10 +70,10 @@ export function QuestionRow({
     try {
       if (saved) {
         removeSaved(q.key);
-        toast.success("Removed from saved", { id: `save-${q.key}` });
+        toast.success("Removed from your checklist", { id: `save-${q.key}` });
       } else {
         save(false);
-        toast.success("Saved", { id: `save-${q.key}` });
+        toast.success("Saved to your checklist", { id: `save-${q.key}` });
       }
     } catch (e) {
       reportError(e);
@@ -110,7 +110,7 @@ export function QuestionRow({
       </div>
       {(showCompanies || companies.length > 1) && (
         <div className="text-muted-foreground mt-2 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-sm">
-          <span>Asked at:</span>
+          <span>Asked at</span>
           <ul className="contents">
             {companies.map((c) => (
               <li key={c} className="text-foreground inline-flex items-center gap-1.5">

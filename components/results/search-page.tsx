@@ -24,8 +24,8 @@ function Skeleton({ slow, onCancel }: { slow: boolean; onCancel: () => void }) {
       <div className="bg-card flex flex-wrap items-center justify-between gap-3 rounded-2xl border p-4">
         <p>
           {slow
-            ? "Still searching. Web search plus analysis can take up to a minute."
-            : "Searching the web, this can take up to a minute."}
+            ? "Still working. Searching and verifying sources can take up to a minute."
+            : "Searching the web. This can take up to a minute."}
         </p>
         <Button variant="outline" className="h-11 rounded-xl px-4" onClick={onCancel}>
           Cancel
@@ -122,7 +122,7 @@ export function SearchPage() {
           const info =
             e instanceof SearchFailure
               ? e.info
-              : { code: "error", message: "Search failed.", retryable: true, requestId: "-" };
+              : { code: "error", message: "The search didn't complete. Try again.", retryable: true, requestId: "-" };
           setState({ kind: "error", ...info });
         })
         .finally(() => clearTimeout(slowTimer));
@@ -158,7 +158,7 @@ export function SearchPage() {
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-10">
-      <p className="kicker text-muted-foreground">Live web search</p>
+      <p className="kicker text-muted-foreground">Live results</p>
       <h1 className="text-section mt-2 font-semibold">Results</h1>
       <details className="bg-card mt-4 rounded-2xl border p-4 sm:p-5" open={state.kind === "invalid"}>
         <summary className="min-h-11 cursor-pointer content-center font-semibold">Edit search</summary>
@@ -200,7 +200,7 @@ export function SearchPage() {
         )}
         {state.kind === "done" && !state.result.isDsaTopic && (
           <div className="bg-card rounded-2xl border border-dashed p-8 text-center">
-            <p className="font-semibold">That doesn&apos;t look like a DSA topic.</p>
+            <p className="font-semibold">That doesn&apos;t look like a DSA topic</p>
             <p className="text-muted-foreground mt-2">
               Try something like &ldquo;sliding window&rdquo;, &ldquo;graphs&rdquo; or &ldquo;dynamic
               programming&rdquo;.
@@ -209,9 +209,9 @@ export function SearchPage() {
         )}
         {state.kind === "done" && state.result.isDsaTopic && state.result.companies.length === 0 && (
           <div className="bg-card rounded-2xl border border-dashed p-8 text-center">
-            <p className="font-semibold">No sourced questions found for this search.</p>
+            <p className="font-semibold">No sourced questions found</p>
             <p className="text-muted-foreground mt-2">
-              We only show questions tied to a cited source. Try a broader topic, remove the company filter, or refresh
+              We only show questions backed by a cited source. Try a broader topic, remove the company, or refresh
               later.
             </p>
             {state.result.notes && (
@@ -242,10 +242,10 @@ export function SearchPage() {
                     onClick={() => {
                       try {
                         deleteCached(keyRef.current);
-                        toast.success("Cached search deleted", { id: "cache-del" });
+                        toast.success("Cached search removed", { id: "cache-del" });
                         setState((s) => (s.kind === "done" ? { ...s, cachedAt: undefined } : s));
                       } catch (e) {
-                        toast.error(e instanceof StorageError ? e.message : "Could not delete.", {
+                        toast.error(e instanceof StorageError ? e.message : "Couldn't remove the cached search.", {
                           id: "storage-error",
                         });
                       }

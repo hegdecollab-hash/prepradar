@@ -11,7 +11,6 @@ import { useStorageVersion } from "@/lib/use-storage";
 import { cn } from "@/lib/utils";
 import { ConfidenceTag, GroupCard } from "./company-card";
 import { CompanyLogo } from "@/components/company-logo";
-import { requestPrefill } from "@/components/search/search-form";
 
 const selectCls =
   "h-11 w-full rounded-xl border bg-card px-3 outline-none focus-visible:border-primary focus-visible:ring-4 focus-visible:ring-primary/15";
@@ -75,7 +74,7 @@ function FilterControls({
           <option value="all">All questions</option>
           <option value="saved">Saved</option>
           <option value="solved">Solved</option>
-          <option value="unsolved">Not solved</option>
+          <option value="unsolved">Unsolved</option>
         </select>
       </div>
       <button
@@ -92,11 +91,9 @@ function FilterControls({
 export function ResultsView({
   result,
   actions,
-  sample = false,
 }: {
   result: SearchResult;
   actions?: React.ReactNode;
-  sample?: boolean;
 }) {
   const [f, setF] = useState<Filters>({ company: "", difficulty: "Any", status: "all" });
   const [mode, setMode] = useState<"company" | "question">("company");
@@ -123,30 +120,6 @@ export function ResultsView({
 
   return (
     <div className="space-y-6">
-      {sample && (
-        <div
-          role="note"
-          aria-label="Sample notice"
-          className="border-gold sticky top-[4.5rem] z-30 flex flex-col gap-3 rounded-2xl border-2 bg-[#fffdf9] p-4 shadow-[0_8px_24px_-12px_rgba(31,31,35,0.25)] sm:flex-row sm:items-center sm:justify-between sm:p-5"
-        >
-          <div>
-            <p className="kicker text-[#7a5a12]">Sample · not live</p>
-            <p className="font-display mt-1 text-[1.125rem] leading-snug font-semibold tracking-tight">
-              This is a sample, not a live search.
-            </p>
-            <p className="text-muted-foreground mt-0.5 text-sm">
-              Placeholder companies and sources, shown only to preview the layout.
-            </p>
-          </div>
-          <button
-            type="button"
-            onClick={() => requestPrefill(result.topic)}
-            className="bg-primary text-primary-foreground hover:bg-primary/90 inline-flex min-h-11 shrink-0 items-center justify-center rounded-xl px-5 font-semibold"
-          >
-            Run a real search
-          </button>
-        </div>
-      )}
       <div className="space-y-3">
         <p className="text-muted-foreground font-mono text-[0.8125rem] leading-relaxed">
           <span className="font-display text-foreground text-[1.0625rem] font-semibold tracking-tight">
@@ -161,7 +134,7 @@ export function ResultsView({
           {" · "}
           {result.companies.length} {result.companies.length === 1 ? "company" : "companies"} · {totalQ} question
           {totalQ === 1 ? "" : "s"} ·{" "}
-          {sample ? "static example, not searched" : `searched ${searched} · ${result.model}`}
+          {`searched ${searched} · ${result.model}`}
         </p>
         <p className="border-gold/40 rounded-xl border bg-[#fffdf9] px-4 py-3 text-[0.9375rem]">{DISCLAIMER}</p>
         {result.notes && <p className="text-muted-foreground text-[0.9375rem]">Note from search: {result.notes}</p>}
@@ -170,7 +143,7 @@ export function ResultsView({
 
       <div className="grid gap-6 lg:grid-cols-[16rem_1fr]">
         <aside className="hidden lg:block" aria-label="Filters">
-          <div className={cn("bg-card sticky rounded-2xl border p-5", sample ? "top-[12.5rem]" : "top-24")}>
+          <div className={"bg-card sticky top-24 rounded-2xl border p-5"}>
             <FilterControls result={result} f={f} setF={setF} idp="d" />
           </div>
         </aside>
@@ -211,7 +184,7 @@ export function ResultsView({
 
           {shown === 0 && anyFilter && (
             <div className="bg-card rounded-2xl border border-dashed p-8 text-center">
-              <p className="font-semibold">No questions match these filters.</p>
+              <p className="font-semibold">No questions match these filters</p>
               <button
                 type="button"
                 className="text-primary mt-2 min-h-11 hover:underline"

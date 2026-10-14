@@ -6,7 +6,7 @@ export const metadata: Metadata = { title: "Results", robots: { index: false, fo
 
 export default function Page() {
   return (
-    <Suspense fallback={<div className="mx-auto max-w-6xl px-4 py-10">Loading…</div>}>
+    <Suspense fallback={<div className="mx-auto max-w-6xl px-4 py-10">Loading results…</div>}>
       <SearchPage />
     </Suspense>
   );

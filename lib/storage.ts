@@ -109,8 +109,8 @@ export function writeJson(key: string, value: unknown): void {
   } catch (e) {
     const name = (e as { name?: string })?.name;
     if (name === "QuotaExceededError" || name === "NS_ERROR_DOM_QUOTA_REACHED")
-      throw new StorageError("quota", "Browser storage is full. Delete cached searches to free space.");
-    throw new StorageError("unavailable", "Could not write to browser storage.");
+      throw new StorageError("quota", "Browser storage is full. Delete cached searches to free up space.");
+    throw new StorageError("unavailable", "Couldn't save to browser storage.");
   }
   emit();
 }

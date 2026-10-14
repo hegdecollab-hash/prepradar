@@ -16,17 +16,17 @@ const mono = JetBrains_Mono({
 });
 
 const description =
-  "Enter a DSA topic. See which companies asked about it, the questions reported, and a LeetCode link for each.";
+  "Search any DSA topic to see which companies ask it, the questions candidates reported, and a LeetCode link for each.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(APP_URL),
-  title: { default: `${APP_NAME} · Know what companies actually ask`, template: `%s · ${APP_NAME}` },
+  title: { default: `${APP_NAME} · See what companies actually ask`, template: `%s · ${APP_NAME}` },
   description,
   openGraph: {
     type: "website",
     url: "/",
     siteName: APP_NAME,
-    title: `${APP_NAME} · Know what companies actually ask`,
+    title: `${APP_NAME} · See what companies actually ask`,
     description,
     images: [{ url: "/og.png", width: 1200, height: 630, alt: APP_NAME }],
   },

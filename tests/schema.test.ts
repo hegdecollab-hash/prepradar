@@ -20,7 +20,7 @@ describe("validation", () => {
     expect(cacheKey("  Sliding   Window ", " Google ")).toBe(cacheKey("sliding window", "google"));
   });
   it("whatsapp link is encoded and generic", () => {
-    expect(WHATSAPP_URL).toContain("wa.me/918500097071?text=Hi%20FlowSite%20AI%2C");
+    expect(WHATSAPP_URL).toContain("wa.me/918500097071?text=Hi%2C%20I%20came%20across%20PrepRadar");
   });
 });
 

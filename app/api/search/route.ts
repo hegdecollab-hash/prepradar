@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
   if (!sameOrigin(req)) return err(403, "forbidden_origin", "Requests must come from this site.", false, requestId);
 
   const raw = await req.text();
-  if (raw.length > MAX_BODY) return err(413, "body_too_large", "Request is too large.", false, requestId);
+  if (raw.length > MAX_BODY) return err(413, "body_too_large", "This request is too large.", false, requestId);
   let data: unknown;
   try {
     data = JSON.parse(raw);
@@ -53,14 +53,14 @@ export async function POST(req: NextRequest) {
   try {
     input = (await apiInputSchema.validate(data, { abortEarly: true })) as typeof input;
   } catch (e) {
-    const msg = e instanceof ValidationError ? e.message : "Invalid request.";
+    const msg = e instanceof ValidationError ? e.message : "This request isn't valid.";
     return err(400, "invalid_input", msg, false, requestId);
   }
   requestId = input.requestId;
 
   const ip = (req.headers.get("x-forwarded-for") ?? "").split(",")[0].trim() || "local";
   if (!rateLimit(ip))
-    return err(429, "rate_limited", "Too many searches. Wait a few minutes and try again.", true, requestId);
+    return err(429, "rate_limited", "You've reached the search limit. Try again in a few minutes.", true, requestId);
 
   let model = "";
   try {
@@ -151,7 +151,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(result, { headers: HEADERS });
   } catch (e) {
     const u =
-      e instanceof UpstreamError ? e : new UpstreamError("internal", "Something went wrong on our side.", true, 500);
+      e instanceof UpstreamError ? e : new UpstreamError("internal", "We hit an unexpected error. Try again.", true, 500);
     log({ requestId, status: u.status, code: u.code, ms: Date.now() - started, model });
     return err(u.status, u.code, u.message, u.retryable, requestId);
   }
