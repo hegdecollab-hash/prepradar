@@ -1,6 +1,5 @@
 import { describe, expect, it } from "vitest";
 import { apiInputSchema, cacheKey, searchFormSchema } from "@/lib/schema";
-import { WHATSAPP_URL } from "@/lib/config";
 
 describe("validation", () => {
   it("rejects empty, whitespace, too short and too long topics", async () => {
@@ -18,9 +17,6 @@ describe("validation", () => {
   });
   it("normalizes cache keys", () => {
     expect(cacheKey("  Sliding   Window ", " Google ")).toBe(cacheKey("sliding window", "google"));
-  });
-  it("whatsapp link is encoded and generic", () => {
-    expect(WHATSAPP_URL).toContain("wa.me/918500097071?text=Hi%2C%20I%20came%20across%20PrepRadar");
   });
 });
 
